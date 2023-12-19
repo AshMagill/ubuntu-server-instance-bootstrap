@@ -11,4 +11,6 @@ Read the shell script before using for the fist time if youre unsure of safety a
 
 run this to curl this shell scirpt to your instance:
 
-curl -o setup.sh https://raw.githubusercontent.com/AshMagill/ubuntu-server-instance-bootstrap/main/setup.sh
+```
+curl -o letsroll.sh https://raw.githubusercontent.com/AshMagill/ubuntu-server-instance-bootstrap/main/letsroll.sh
+```
