@@ -1,14 +1,21 @@
 #!/bin/bash
+# Run as sudo
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root"
+  exit
+fi
 # Prompt for GitHub username and password
 read -p "Enter your GitHub username: " username
 read -s -p "Enter your GitHub password: " password
 echo
 # Install Docker
-sudo apt-get update
-sudo apt-get install -y docker.io
+apt-get update
+apt-get install -y docker.io
 # Install Docker Compose
-sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
+curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
+# Add current user to docker group
+usermod -aG docker $USER
 # Clone the GitHub repository
 read -p "Enter the full GitHub repository link: " repo_link
 git clone $repo_link
