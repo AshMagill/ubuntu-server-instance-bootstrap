@@ -2,7 +2,7 @@
 # Prompt for the GitHub repository link
 read -p "Enter the GitHub repository link: " repo_link
 # Check if the repository link is private
-if [[ $repo_link == *"github.com"* ]]; then
+if echo "$repo_link" | grep -q "github.com"; then
     read -p "Is the repository private? (y/n): " is_private
     if [[ $is_private == "y" ]]; then
         # Prompt for the username and private user key
