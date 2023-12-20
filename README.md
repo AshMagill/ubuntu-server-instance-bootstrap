@@ -14,5 +14,7 @@ Please read the shell script before using for the fist time if youre unsure of s
 run this to curl this shell scirpt to your instance:
 
 ```
-curl -o letsroll.sh https://raw.githubusercontent.com/AshMagill/ubuntu-server-instance-bootstrap/main/letsroll.sh
+curl -O https://raw.githubusercontent.com/AshMagill/ubuntu-server-instance-bootstrap/main/letsrock.sh
+curl -O https://raw.githubusercontent.com/AshMagill/ubuntu-server-instance-bootstrap/main/letsroll.sh
+curl -O https://raw.githubusercontent.com/AshMagill/ubuntu-server-instance-bootstrap/main/letsrocknroll.sh
 ```
