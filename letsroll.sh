@@ -19,12 +19,7 @@ fi
 read -p "Enter the GitHub repo link: " repo_link
 # Check if the repo is private
 if [[ $repo_link == *"github.com"* ]]; then
-    if [[ $repo_link == *"https://"* ]]; then
-        repo_link=${repo_link/https:\/\//}
-    elif [[ $repo_link == *"http://"* ]]; then
-        repo_link=${repo_link/http:\/\//}
-    fi
-    repo_info=$(curl -s "https://api.github.com/repos/$repo_link")
+    repo_info=$(curl -s "https://api.github.com/repos${repo_link#*github.com}")
     is_private=$(echo "$repo_info" | grep -o '"private":.*' | awk '{print $2}')
     if [[ $is_private == "true," ]]; then
         # Prompt for username and private key
@@ -51,4 +46,3 @@ cd repo
 # ...
 # Finish the script
 echo "Script completed successfully."
-
