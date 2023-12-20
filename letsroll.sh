@@ -17,24 +17,22 @@ if ! command -v docker &> /dev/null; then
 fi
 # Prompt for GitHub repo link
 read -p "Enter the GitHub repo link: " repo_link
+# Extract the repo owner and name from the link
+repo_owner=$(echo "$repo_link" | awk -F'/' '{print $4}')
+repo_name=$(echo "$repo_link" | awk -F'/' '{print $5}')
 # Check if the repo is private
-if [[ $repo_link == *"github.com"* ]]; then
-    repo_info=$(curl -s "https://api.github.com/repos${repo_link#*github.com}")
-    is_private=$(echo "$repo_info" | grep -o '"private":.*' | awk '{print $2}')
-    if [[ $is_private == "true," ]]; then
-        # Prompt for username and private key
-        read -p "Enter your GitHub username: " username
-        read -s -p "Enter your private key: " private_key
-        echo
-        # Download the private repo using curl with authentication
-        curl -u "$username:$private_key" -L "$repo_link" -o repo.zip
-    else
-        # Download the public repo using curl
-        curl -L "$repo_link" -o repo.zip
-    fi
+repo_info=$(curl -s "https://api.github.com/repos/$repo_owner/$repo_name")
+is_private=$(echo "$repo_info" | grep -o '"private":.*' | awk '{print $2}')
+if [[ $is_private == "true," ]]; then
+    # Prompt for username and private key
+    read -p "Enter your GitHub username: " username
+    read -s -p "Enter your private key: " private_key
+    echo
+    # Download the private repo using curl with authentication
+    curl -u "$username:$private_key" -L "$repo_link" -o repo.zip
 else
-    echo "Invalid GitHub repo link."
-    exit 1
+    # Download the public repo using curl
+    curl -L "$repo_link" -o repo.zip
 fi
 # Unzip the downloaded repo
 unzip repo.zip
