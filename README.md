@@ -16,5 +16,4 @@ run this to curl this shell scirpt to your instance:
 ```
 curl -O https://raw.githubusercontent.com/AshMagill/ubuntu-server-instance-bootstrap/main/letsrock.sh
 curl -O https://raw.githubusercontent.com/AshMagill/ubuntu-server-instance-bootstrap/main/letsroll.sh
-curl -O https://raw.githubusercontent.com/AshMagill/ubuntu-server-instance-bootstrap/main/letsrocknroll.sh
 ```
